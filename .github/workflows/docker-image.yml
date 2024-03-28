@@ -1,0 +1,30 @@
+name: Prisma Demo CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+      # Add Prisma Cloud vulnerability scanning step here
+      # Example: Use Prisma Cloud Compute Scanner to scan the image
+
+      # Add deployment steps to EKS here
+      - name: Deploy to EKS
+        run: |
+          # Authenticate with EKS cluster (replace with your actual authentication method)
+          aws eks update-kubeconfig --region us-east-1 --name Prisma_Cloud_Demo
+          kubectl apply -f deployment.yaml
+
+
