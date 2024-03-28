@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag Prisma_Demo:$(date +%s)
+        run: docker build . --file Dockerfile
 
       # Add Prisma Cloud vulnerability scanning step here
       # Example: Use Prisma Cloud Compute Scanner to scan the image
